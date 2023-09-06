@@ -2,6 +2,8 @@
 
 FILE=$1
 
+# ./build_win.sh service
+
 if [ "$FILE" == "" ];then
     echo "file nil"
     exit 1
