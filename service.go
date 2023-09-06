@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 
 	"github.com/kardianos/service"
 	log "github.com/sirupsen/logrus"
@@ -14,21 +13,6 @@ var serviceConfig = &service.Config{Name: "serviceName",
 	DisplayName: "service Display Name",
 	Description: "service description",
 }
-
-/*
-func regAdd() {
-	k, err := registry.OpenKey(registry.LOCAL_MACHINE, `SAM\XIAO`, registry.ALL_ACCESS)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer k.Close()
-	s, _, err := k.GetStringValue("x")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%q\n", s)
-}
-*/
 
 func registryTest() {
 	// 创建：指定路径的项
@@ -76,20 +60,6 @@ func registryTest() {
 	registry.DeleteKey(key, `子项`)
 }
 
-func cmdsAdd() {
-	log.Info("cmdsAdd ...")
-
-	u := fmt.Sprintf("http://127.0.0.1/proxy.js")
-	log.Info("u:", u)
-
-	err := exec.Command("reg", "add", `HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings`, "/v", "AutoConfigURL", "/t", "REG_SZ", "/d", u, "/f").Run()
-	if err != nil {
-		log.Errorf("set AutoConfigURL error, %s\n", err.Error())
-		return
-	}
-
-	log.Info("cmdsAdd done!")
-}
 func main() {
 
 	file := "c:\\" + "message" + ".txt"
